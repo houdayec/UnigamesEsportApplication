@@ -75,11 +75,15 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_infos) {
+        if (id == R.id.nav_event) {
             fragment = new Fragment_Infos();
-        } else if (id == R.id.nav_news) {
+        } else if (id == R.id.nav_location) {
             fragment = new Fragment_News();
-        } else if (id == R.id.nav_tournament) {
+        } else if (id == R.id.nav_news) {
+
+        } else if (id == R.id.nav_bracket) {
+
+        } else if (id == R.id.nav_teams) {
 
         } else if (id == R.id.nav_stream) {
 
