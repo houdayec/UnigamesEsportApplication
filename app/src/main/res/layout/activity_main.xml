@@ -18,7 +18,7 @@
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="67dp" />
+            android:layout_height="60dp" />
 
         <!-- The main content view where fragments are loaded -->
 
