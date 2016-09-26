@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
-            fragment = new Fragment_Infos();
+            fragment = new EventFragment();
         } else if (id == R.id.nav_location) {
             fragment = new Fragment_News();
         } else if (id == R.id.nav_news) {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_bracket) {
 
         } else if (id == R.id.nav_teams) {
-
+            fragment = new Fragment_Infos();
         } else if (id == R.id.nav_stream) {
 
         }

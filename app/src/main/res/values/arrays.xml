@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="questions">
+        <item>Q1</item>
+        <item>Q2</item>
+        <item>Q3</item>
+    </string-array>
+    <string-array name="answers">
+        <item>Lorem ipsum suomi finland perkele</item>
+        <item>A2</item>
+        <item>A3</item>
+    </string-array>
+</resources>
