@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
             twitterFrag = new NewsFragment();
             isTwitterFrag = true;
         } else if (id == R.id.nav_bracket) {
-
+            fragment = new BracketFragment();
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
