@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 23
@@ -10,6 +21,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -23,6 +35,9 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    maven {
+        url 'https://maven.fabric.io/public'
+    }
 }
 
 dependencies {
@@ -30,5 +45,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
+    compile('com.twitter.sdk.android:twitter:2.0.1@aar') {
+        transitive = true;
+    }
     compile 'com.github.luizgrp:SectionedRecyclerViewAdapter:27213a5da5'
 }

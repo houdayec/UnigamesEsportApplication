@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <group android:checkableBehavior="single">
+        <group>
             <item
                 android:id="@+id/nav_news"
                 android:icon="@drawable/ic_action_unread"
-                android:title="News" />
+                android:title="News"
+                android:actionMenuTextColor="#541D5D"/>
         </group>
-        <item android:title="Information">
+        <item android:title="INFORMATION">
             <menu>
                 <item
                     android:id="@+id/nav_event"
                     android:icon="@drawable/ic_action_web_site"
-                    android:title="Event" />
+                    android:title="Event"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
                 <item
                     android:id="@+id/nav_location"
                     android:icon="@drawable/ic_action_directions"
-                    android:title="Location" />
+                    android:title="Location"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
             </menu>
         </item>
 
-        <item android:title="Tournament">
+        <item android:title="TOURNAMENT">
             <menu>
                 <item
                     android:id="@+id/nav_bracket"
                     android:icon="@drawable/ic_action_event"
-                    android:title="Bracket" />
+                    android:title="Bracket"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
                 <item
                     android:id="@+id/nav_teams"
                     android:icon="@drawable/ic_action_group"
-                    android:title="Teams" />
+                    android:title="Teams"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
                 <item
                     android:id="@+id/nav_stream"
                     android:icon="@drawable/ic_action_video"
-                    android:title="Live stream" />
+                    android:title="Live stream"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
             </menu>
         </item>
 

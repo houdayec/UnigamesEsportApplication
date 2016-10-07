@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/logo"
         android:layout_gravity="center"/>
@@ -23,11 +23,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:paddingTop="4dp"
         android:text="Unigames E-Sports"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:gravity="center"
-        android:textColor="#000000"/>
+        android:textColor="#541D5D"/>
 
     <TextView
         android:id="@+id/textView"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:text="League of Legends tournament"
         android:gravity="center"
-        android:textColor="#000000"/>
+        android:textColor="#541D5D"/>
 
 </LinearLayout>
