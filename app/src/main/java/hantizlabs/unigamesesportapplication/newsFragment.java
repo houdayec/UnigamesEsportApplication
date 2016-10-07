@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
+import hantizlabs.unigamesesportapplication.R;
+
 /**
  * Created by Corentin on 20/09/2016.
  */

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/tile_padding">
+
+    <hantizlabs.unigamesesportapplication.SquareImageView
+        android:id="@+id/tile_picture"
+        android:layout_width="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/a_avator"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:baselineAlignBottom="false"
+        android:background="@android:color/transparent"
+        android:layout_height="match_parent" />
+
+    <hantizlabs.unigamesesportapplication.SquareImageView
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tile_height"
+        android:alpha="0.3"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/tile_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tile_height"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/article_titles"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

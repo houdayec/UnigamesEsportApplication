@@ -3,6 +3,7 @@ package hantizlabs.unigamesesportapplication;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.bumptech.glide.Glide;
  * Created by Ian on 04/10/2016.
  */
 
-public class ListTeamFragment extends ListFragment {
+public class ListTeamFragment extends DialogFragment {
 
     private String[] values={"Tima","Guntab","Cartim","Devis","Francis"};
     private String[] positions={"Support","ADC","Jungle","Other","Other"};
