@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_bracket) {
 
         } else if (id == R.id.nav_teams) {
-            fragment = new Fragment_Infos();
+            fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
 
         }
