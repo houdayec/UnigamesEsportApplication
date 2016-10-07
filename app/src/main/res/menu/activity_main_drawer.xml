@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <group>
-            <item
-                android:id="@+id/nav_news"
-                android:icon="@drawable/ic_action_unread"
-                android:title="News"
-                android:actionMenuTextColor="#541D5D"/>
-        </group>
+        <item android:title="SOCIAL MEDIA">
+            <menu>
+                <item
+                    android:id="@+id/nav_news"
+                    android:icon="@drawable/ic_twitter"
+                    android:title="Twitter"
+                    android:actionMenuTextColor="#541D5D"/>
+            </menu>
+        </item>
         <item android:title="INFORMATION">
             <menu>
                 <item
