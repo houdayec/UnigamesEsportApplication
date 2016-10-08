@@ -14,13 +14,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Top bar -->
+        <!-- Top bar with toolbar -->
+
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
-
-        <!-- The main content view where fragments are loaded -->
+            android:layout_height="50dp" />
+        --><!-- The main content view where fragments are loaded -->
 
         <FrameLayout
             android:id="@+id/mainContent"
