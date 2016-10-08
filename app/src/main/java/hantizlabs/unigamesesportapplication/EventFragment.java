@@ -14,6 +14,7 @@ import android.widget.TextView;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
+
 /**
  * Created by Paweł on 26/09/2016.
  */
@@ -36,10 +37,8 @@ public class EventFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(sectionAdapter);
-
         return view;
     }
-
 
     // Sets the name on the toolbar - please make similar function for every fragment
     @Override

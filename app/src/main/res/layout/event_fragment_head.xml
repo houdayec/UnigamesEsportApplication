@@ -3,9 +3,7 @@
     android:id="@+id/rootView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:layout_height="48dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
@@ -13,9 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
         android:id="@+id/tvTitle" />
 
     <ImageView
@@ -24,12 +23,6 @@
         android:layout_height="15dp"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_keyboard_arrow_down"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

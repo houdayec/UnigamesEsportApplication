@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="questions">
-        <item>Q1</item>
-        <item>Q2</item>
-        <item>Q3</item>
+        <item>What is Unigames?</item>
+        <item>Why should I go there?</item>
+        <item>Where and when it takes place?</item>
     </string-array>
     <string-array name="answers">
-        <item>Lorem ipsum suomi finland perkele</item>
-        <item>A2</item>
-        <item>A3</item>
+        <item>Unigames is a new gaming event targeted for all university students in Helsinki metropolitan area. Take part and challenge your friends in different games and competitions to win some prizes. The event culminates into a League of Legends tournament finale. Qualification matches will be played online during previous weeks. All university students are allowed to take part on the tournament, but you don’t have to play the game to attend the event.</item>
+        <item>Unigames is a great opportunity to meet and challenge students with shared interests from six different universities and we want to promote the gaming scene between universities in Helsinki metropolitan area. We give you spotlights of the gaming industry today and unforgettable classics to feel that nostalgia.</item>
+        <item>The event will take place on Sunday 20th of November 2016 in Casino Helsinki. We highly recommend you get your tickets early, since only a limited amount of people fit in. Tickets will be sold at Bailataan.fi, price starts from 9,50e.</item>
     </string-array>
 </resources>

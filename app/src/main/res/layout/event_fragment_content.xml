@@ -11,6 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
         android:id="@+id/tvItem" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrey300"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
