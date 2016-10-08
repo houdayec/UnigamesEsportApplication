@@ -3,6 +3,8 @@
     <color name="colorPrimary">#541D5D</color>
     <color name="colorPrimaryDark">#461E49</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorGrey300">#E0E0E0</color>
     <color name="colorForMenu">#541D5D</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
