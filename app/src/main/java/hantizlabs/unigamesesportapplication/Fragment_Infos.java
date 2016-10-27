@@ -71,7 +71,7 @@ public class Fragment_Infos extends Fragment {
                     BracketFragment tab3 = new BracketFragment();
                     return tab3;
                 case 3:
-                    TabFragment4 tab4 = new TabFragment4();
+                    MainFragment tab4 = new MainFragment();
                     return tab4;
                 case 4:
                     TabFragment5 tab5 = new TabFragment5();

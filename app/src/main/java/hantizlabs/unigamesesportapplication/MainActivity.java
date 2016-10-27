@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
     }
 
     @Override
@@ -85,14 +89,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        Fragment fragment = new Fragment_Infos();
+        Fragment fragment = new MainFragment();
         NewsFragment twitterFrag = new NewsFragment();
         boolean isTwitterFrag = false;
 
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
-            fragment = new EventFragment();
+            fragment = new MainFragment();
         } else if (id == R.id.nav_location) {
             fragment = new LocationFragment();
         } else if (id == R.id.nav_news) {
