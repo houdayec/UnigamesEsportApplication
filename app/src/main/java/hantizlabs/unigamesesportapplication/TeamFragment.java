@@ -33,7 +33,7 @@ public class TeamFragment extends Fragment {
     private String[] positionsT1={"Support","ADC","Jungle","Other","Other"};
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.tab_fragment_5, container, false);
+        //return inflater.inflate(R.layout.twitch_fragment, container, false);
         View view= (View)inflater.inflate(R.layout.team_fragment, container, false);
         GridView gridView = (GridView) view.findViewById(R.id.grid);
         gridView.setAdapter(new TeamAdapter(view.getContext()));

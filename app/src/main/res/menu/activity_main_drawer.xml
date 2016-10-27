@@ -28,9 +28,14 @@
         <item android:title="TOURNAMENT">
             <menu>
                 <item
-                    android:id="@+id/nav_bracket"
+                    android:id="@+id/nav_winner_bracket"
                     android:icon="@drawable/ic_action_event"
-                    android:title="Bracket"
+                    android:title="Winners Bracket"
+                    android:actionMenuTextColor="@color/colorForMenu"/>
+                <item
+                    android:id="@+id/nav_loser_bracket"
+                    android:icon="@drawable/ic_action_event"
+                    android:title="Losers Bracket"
                     android:actionMenuTextColor="@color/colorForMenu"/>
                 <item
                     android:id="@+id/nav_teams"

@@ -1,7 +1,5 @@
 package hantizlabs.unigamesesportapplication;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -47,10 +45,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        Fragment fragment = new MainFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
     }
 
     @Override
@@ -89,27 +83,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        Fragment fragment = new MainFragment();
+        Fragment fragment = new Fragment_Infos();
         NewsFragment twitterFrag = new NewsFragment();
         boolean isTwitterFrag = false;
 
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
-            fragment = new MainFragment();
+            fragment = new EventFragment();
         } else if (id == R.id.nav_location) {
-            fragment = new LocationFragment();
+            //fragment = new NewsFragment();
         } else if (id == R.id.nav_news) {
             twitterFrag = new NewsFragment();
             isTwitterFrag = true;
-        } else if (id == R.id.nav_bracket) {
-            fragment = new BracketFragment();
+        } else if (id == R.id.nav_winner_bracket) {
+            fragment = new WinnerBracketFragment();
+        } else if (id == R.id.nav_loser_bracket) {
+            fragment = new LoserBracketFragment();
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(
-                    "http://www.twitch.tv/unigames_fin"));
-            startActivity(intent);
+            fragment = new TwitchFragment();
         }
 
         //Detect if the fragment is for the twitter or not

@@ -3,23 +3,13 @@
     package="hantizlabs.unigamesesportapplication">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="hantizlabs.unigamesesportapplication.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBnnq5WCT_uW8qHiv5g5xrm4XNZUQcVHEY" />
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -28,10 +18,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="4423788755572feadf9e912403ccd8eadbaa9f91" />
         </activity>
-
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4423788755572feadf9e912403ccd8eadbaa9f91" />
     </application>
 </manifest>
