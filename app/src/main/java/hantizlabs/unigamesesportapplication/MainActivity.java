@@ -1,5 +1,7 @@
 package hantizlabs.unigamesesportapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_event) {
             fragment = new EventFragment();
         } else if (id == R.id.nav_location) {
-            //fragment = new NewsFragment();
+            fragment = new LocationFragment();
         } else if (id == R.id.nav_news) {
             twitterFrag = new NewsFragment();
             isTwitterFrag = true;
@@ -101,7 +103,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
-
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(
+                    "http://www.twitch.tv/unigames_fin"));
+            startActivity(intent);
         }
 
         //Detect if the fragment is for the twitter or not
