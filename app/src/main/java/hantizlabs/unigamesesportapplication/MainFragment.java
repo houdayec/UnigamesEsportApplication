@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,5 +27,16 @@ public class MainFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = ((AppCompatActivity) getActivity());
+            if (activity.getSupportActionBar() != null)
+                activity.getSupportActionBar().setTitle("Unigames 2016");
+        }
     }
 }

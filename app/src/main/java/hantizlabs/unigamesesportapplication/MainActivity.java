@@ -1,5 +1,7 @@
 package hantizlabs.unigamesesportapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.twitter.sdk.android.Twitter;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d("Fuck you", " Thanks");
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
 
@@ -45,6 +50,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
     }
 
     @Override
@@ -90,9 +99,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
-            fragment = new EventFragment();
+            fragment = new MainFragment();
         } else if (id == R.id.nav_location) {
-            //fragment = new NewsFragment();
+            fragment = new LocationFragment();
         } else if (id == R.id.nav_news) {
             twitterFrag = new NewsFragment();
             isTwitterFrag = true;
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
-            fragment = new TwitchFragment();
+            fragment = new StreamFragment();
         }
 
         //Detect if the fragment is for the twitter or not

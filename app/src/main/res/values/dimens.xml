@@ -9,6 +9,8 @@
     <dimen name="md_keylines">16dp</dimen>
     <dimen name="tile_padding">8dp</dimen>
     <dimen name="tile_height">160dp</dimen>
+    <dimen name="popup_height">300dp</dimen>
+    <dimen name="popup_width">300dp</dimen>
     <dimen name="article_titles">20sp</dimen>
 
 </resources>

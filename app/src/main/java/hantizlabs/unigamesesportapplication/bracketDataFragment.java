@@ -110,9 +110,7 @@ public class bracketDataFragment extends Fragment {
         }
     }
 
-    /*public void getTournamentData(){
-        new bracketDataFragment.TaskTournament().execute();
-    }*/
+
 
 
 

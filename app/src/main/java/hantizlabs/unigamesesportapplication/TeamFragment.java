@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 import static android.R.attr.fragment;
 
 /**
@@ -31,9 +33,10 @@ import static android.R.attr.fragment;
 public class TeamFragment extends Fragment {
     private String[] valuesT1={"Tima","Guntab","Cartim","Devis","Francis"};
     private String[] positionsT1={"Support","ADC","Jungle","Other","Other"};
+    Bundle bundle= new Bundle();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return inflater.inflate(R.layout.twitch_fragment, container, false);
+        //return inflater.inflate(R.layout.tab_fragment_5, container, false);
         View view= (View)inflater.inflate(R.layout.team_fragment, container, false);
         GridView gridView = (GridView) view.findViewById(R.id.grid);
         gridView.setAdapter(new TeamAdapter(view.getContext()));
@@ -46,9 +49,11 @@ public class TeamFragment extends Fragment {
                  * change the ALL the dialogs for a reyclerviewDialog (ListTeamFragment) and make
                  * it look fancier
                  */
+
+
                 if(aux.getName().equals("Team1")){
                     //Toast.makeText(getContext(),"ok",Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
+                   /* AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
                     LayoutInflater inflater2 = getLayoutInflater(null);
                     View v=inflater2.inflate(R.layout.title_dialog, null);
                     builderSingle.setCustomTitle(v);
@@ -65,7 +70,14 @@ public class TeamFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });;
-                    builderSingle.show();
+                    builderSingle.show();*/
+
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",1);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
+
                     /*Fragment listFrag = new ListTeamFragment();
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -74,7 +86,12 @@ public class TeamFragment extends Fragment {
                     fragmentTransaction.commit();*/
                 }
                 if(aux.getName().equals("Team2")){
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",2);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
+                    /*AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
                     LayoutInflater inflater2 = getLayoutInflater(null);
                     View v=inflater2.inflate(R.layout.title_dialog, null);
                     builderSingle.setCustomTitle(v);
@@ -91,87 +108,35 @@ public class TeamFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });;
-                    builderSingle.show();
+                    builderSingle.show();*/
                 }
                 if(aux.getName().equals("Team3")){
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-                    LayoutInflater inflater2 = getLayoutInflater(null);
-                    View v=inflater2.inflate(R.layout.title_dialog, null);
-                    builderSingle.setCustomTitle(v);
-                    // builderSingle.setTitle("Team Members");
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builderSingle.setAdapter(new AdapterList(getContext(),valuesT1,positionsT1), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });;
-                    builderSingle.show();
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",2);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
                 }
                 if(aux.getName().equals("Team4")){
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-                    LayoutInflater inflater2 = getLayoutInflater(null);
-                    View v=inflater2.inflate(R.layout.title_dialog, null);
-                    builderSingle.setCustomTitle(v);
-                    // builderSingle.setTitle("Team Members");
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builderSingle.setAdapter(new AdapterList(getContext(),valuesT1,positionsT1), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });;
-                    builderSingle.show();
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",2);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
                 }
                 if (aux.getName().equals("Team5")){
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-                    LayoutInflater inflater2 = getLayoutInflater(null);
-                    View v=inflater2.inflate(R.layout.title_dialog, null);
-                    builderSingle.setCustomTitle(v);
-                    // builderSingle.setTitle("Team Members");
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builderSingle.setAdapter(new AdapterList(getContext(),valuesT1,positionsT1), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });;
-                    builderSingle.show();
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",2);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
                 }
                 if(aux.getName().equals("Team6")){
-                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-                    LayoutInflater inflater2 = getLayoutInflater(null);
-                    View v=inflater2.inflate(R.layout.title_dialog, null);
-                    builderSingle.setCustomTitle(v);
-                    // builderSingle.setTitle("Team Members");
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builderSingle.setAdapter(new AdapterList(getContext(),valuesT1,positionsT1), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });;
-                    builderSingle.show();
+                    FragmentManager fm = getFragmentManager();
+                    ListTeamFragment dialogFragment = new ListTeamFragment ();
+                    bundle.putInt("Teams",2);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(fm, "Sample Fragment");
                 }
                 //
             }

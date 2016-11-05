@@ -3,6 +3,7 @@ package hantizlabs.unigamesesportapplication;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,6 +60,16 @@ public class LoserBracketFragment extends Fragment {
         //mAdapter = new BracketAdapter(myDataset);
         //mRecyclerView.setAdapter(mAdapter);
         return rootView;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = ((AppCompatActivity) getActivity());
+            if (activity.getSupportActionBar() != null)
+                activity.getSupportActionBar().setTitle("Loosers Bracket");
+        }
     }
 
     public void getTournamentData(){

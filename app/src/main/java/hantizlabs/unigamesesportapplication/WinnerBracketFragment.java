@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,8 +64,8 @@ public class WinnerBracketFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.winner_bracket_layout, container, false);
         test = (TextView) rootView.findViewById(R.id.textView);
-        /*new TaskTournament().execute();
-        do{
+        new TaskTournament().execute();
+        /*do{
             //Log.d("Wait for finish", String.valueOf(Calendar.getInstance().get(Calendar.SECOND)));
         }while(isAsyncTaskFinished != true);*/
         //Fake populate
@@ -103,6 +104,16 @@ public class WinnerBracketFragment extends Fragment{
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = ((AppCompatActivity) getActivity());
+            if (activity.getSupportActionBar() != null)
+                activity.getSupportActionBar().setTitle("Winners Bracket");
+        }
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -177,7 +188,7 @@ public class WinnerBracketFragment extends Fragment{
         }
     }
 
-    private class TaskTournament extends AsyncTask<URL, Integer, List<Match>> {
+    private class TaskTournament extends AsyncTask<URL, Integer, String> {
 
         HttpURLConnection urlConnection = null;
 
@@ -191,10 +202,11 @@ public class WinnerBracketFragment extends Fragment{
 
         }
 
-        protected List<Match> doInBackground(URL... urls) {
-            Log.d("attempt","one try");
+        protected String doInBackground(URL... urls) {
+            Log.d("attempt", "one try");
             String result = "";
             URL retrieveURL;
+
             try {
 
 
@@ -205,22 +217,26 @@ public class WinnerBracketFragment extends Fragment{
                 //urlConnection.setRequestProperty("X-Api-Key","s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
                 //Opening the stream
                 if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    Log.d("JSON","connection HTTP OK");
+                    Log.d("JSON", "connection HTTP OK");
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
                     String line;
+                    StringBuilder tempResult = new StringBuilder();
                     while ((line = reader.readLine()) != null) {
-                        result += line;
-                        Log.d("JSON","resultFromHTTP");
+                        tempResult.append(line);
+                        Log.d("JSON", "resultFromHTTP");
                     }
-                    if(result != null){
-                        Log.d("Result JSON :",result);
-                    }else{
-                        Log.d("JSON","No result !");
+                    result = tempResult.toString();
+                    if (result != null) {
+                        Log.d("Result JSON :", result);
+                    } else {
+                        Log.d("JSON", "No result !");
                     }
                     Log.d("return list match", String.valueOf(returnedListMatch.size()));
+
                     //return returnedListMatch;
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -231,24 +247,26 @@ public class WinnerBracketFragment extends Fragment{
                     Log.d("JSON", "disconnection");
                 }
 
-                return decapsulateData(result);
+                return result;
             }
 
-        }
 
+        }
         protected void onProgressUpdate(Integer... progress) {
 
             Log.d("JSON", "task in progress");
 
         }
 
-        protected void onPostExecute(List<Match> listMatch) {
+        protected void onPostExecute(String result) {
 
             //resultTask = result;
 
             //returnedListMatch = listMatch;
+            decapsulateData(result);
             isAsyncTaskFinished = true;
             Log.d("JSON", "task finished");
+
             //test.setText(resultTask);
         }
     }
@@ -267,22 +285,26 @@ public class WinnerBracketFragment extends Fragment{
 
     public List<Match> decapsulateData(String result){
         try {
+
             jsonArray = new JSONArray(result);
+
             //test.setText("Round : " + jsonArray.getJSONObject(0).getString("round_number").toString());
             for(int i=0; i < jsonArray.length(); i++) {
                 Log.d("One result", "beginning of decapsulation");
-                map = new HashMap<String, String>();
+                //map = new HashMap<String, String>();
                 //We verify that it's a winner bracket match (code 1)
                 if(jsonArray.getJSONObject(i).getString("group_number").toString() != ""){
                     //Compare to the round passed in parameters
                     //We select only matches corresponding to the passed round.
                     if (jsonArray.getJSONObject(i).getString("round_number").toString() != "") {
+
                         currentMatch = new Match();
-                        map.put("round_number", jsonArray.getJSONObject(i).getString("round_number"));
+                        //map.put("round_number", jsonArray.getJSONObject(i).getString("round_number"));
                         //We modify the date into good format one part is date other one time
                         try {
+
                             modifiedDate = jsonArray.getJSONObject(i).getString("date").toString().split("T");
-                            map.put("date", modifiedDate[0]);
+                            //map.put("date", modifiedDate[0]);
                             currentMatch.date = modifiedDate[0];
                             //Now we modify the time
                             //Log.d("date :", modifiedDate[0]);
@@ -290,7 +312,7 @@ public class WinnerBracketFragment extends Fragment{
                             modifiedTime = modifiedDate[1].split(":");
                             hour = modifiedTime[0];
                             minutes = modifiedTime[1];
-                            map.put("time", hour + "h" + minutes);
+                            //map.put("time", hour + "h" + minutes);
                             currentMatch.time = hour + "h" + minutes;
                         }catch(Exception ex){
                             currentMatch.date = "unknown";
@@ -302,8 +324,8 @@ public class WinnerBracketFragment extends Fragment{
 
                         for (int j = 0; i < allOpponents.length(); ++j) {
                             JSONObject opponent = allOpponents.getJSONObject(i);
-                            map.put("opponent" + j + 1 + "name", opponent.getString("participant"));
-                            map.put("opponent" + j + 1 + "score", opponent.getString("score"));
+                            //map.put("opponent" + j + 1 + "name", opponent.getString("participant"));
+                            //map.put("opponent" + j + 1 + "score", opponent.getString("score"));
                             if (j == 0) {
                                 currentMatch.opponent1 = opponent.getString("participant");
                                 currentMatch.opponent1score = opponent.getString("score");
@@ -312,19 +334,22 @@ public class WinnerBracketFragment extends Fragment{
                                 currentMatch.opponent2score = opponent.getString("score");
                             }
                         }
+
                         returnedListMatch.add(currentMatch);
                     } else {
                         //Log.d("Round", "Not corresponding to passed round");
                         break;
                     }
 
+
+
                 }
 
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Log.d("size return decap", String.valueOf(returnedListMatch.size()));
         return returnedListMatch;
     }
 
