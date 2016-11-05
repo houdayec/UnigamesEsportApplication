@@ -40,6 +40,7 @@ public class WinnerBracketFragment extends Fragment{
     TextView test;
     String resultTask = "";
     BracketAdapter bracketAdapter;
+    PagerAdapter pagerAdapter;
     List<Match> returnedListMatch = new ArrayList<Match>();
     boolean isAsyncTaskFinished = false;
     JSONArray jsonArray;
@@ -79,8 +80,9 @@ public class WinnerBracketFragment extends Fragment{
         tabLayout.addTab(tabLayout.newTab().setText("Semi final"));
         tabLayout.addTab(tabLayout.newTab().setText("Final"));
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
+        pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
 
-        viewPager.setAdapter(new PagerAdapter(getFragmentManager(), tabLayout.getTabCount()));
+        viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         viewPager.setCurrentItem(0);
@@ -183,6 +185,11 @@ public class WinnerBracketFragment extends Fragment{
         }
 
         @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
+        @Override
         public int getCount() {
             return mNumOfTabs;
         }
@@ -210,7 +217,10 @@ public class WinnerBracketFragment extends Fragment{
             try {
 
 
-                //Creation of URL
+                //Creation of URL - og one 57ee13fe140ba0cd2a8b4593
+                //57d6a659140ba0754b8b456a
+
+
                 retrieveURL = new URL("https://api.toornament.com/v1/tournaments/57ee13fe140ba0cd2a8b4593/matches?api_key=s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
                 //Creation of connection
                 urlConnection = (HttpURLConnection) retrieveURL.openConnection();
@@ -265,6 +275,7 @@ public class WinnerBracketFragment extends Fragment{
             //returnedListMatch = listMatch;
             decapsulateData(result);
             isAsyncTaskFinished = true;
+            pagerAdapter.notifyDataSetChanged();
             Log.d("JSON", "task finished");
 
             //test.setText(resultTask);
@@ -293,11 +304,12 @@ public class WinnerBracketFragment extends Fragment{
                 Log.d("One result", "beginning of decapsulation");
                 //map = new HashMap<String, String>();
                 //We verify that it's a winner bracket match (code 1)
-                if(jsonArray.getJSONObject(i).getString("group_number").toString() != ""){
+                if(jsonArray.getJSONObject(i).getString("group_number").toString().equals("1")){
+                    Log.d("step 1", "done");
                     //Compare to the round passed in parameters
                     //We select only matches corresponding to the passed round.
-                    if (jsonArray.getJSONObject(i).getString("round_number").toString() != "") {
-
+                    if (jsonArray.getJSONObject(i).getString("round_number").toString().equals("1")) {
+                        Log.d("step 2", "done");
                         currentMatch = new Match();
                         //map.put("round_number", jsonArray.getJSONObject(i).getString("round_number"));
                         //We modify the date into good format one part is date other one time
@@ -343,7 +355,7 @@ public class WinnerBracketFragment extends Fragment{
 
 
 
-                }
+                } else Log.d("step 1", "wrong stage");
 
             }
         } catch (Exception e) {
