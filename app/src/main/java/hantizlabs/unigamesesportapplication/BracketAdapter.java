@@ -57,6 +57,7 @@ public class BracketAdapter extends RecyclerView.Adapter<BracketAdapter.ViewHold
         return vh;
     }
 
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
