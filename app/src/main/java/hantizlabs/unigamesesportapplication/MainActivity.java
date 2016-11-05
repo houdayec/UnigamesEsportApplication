@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        Fragment fragment = new Fragment_Infos();
+        Fragment fragment = new StreamFragment();
         NewsFragment twitterFrag = new NewsFragment();
         boolean isTwitterFrag = false;
 
@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {
-            fragment = new StreamFragment();
+            //fragment = new StreamFragment();
+            Uri uri = Uri.parse("https://www.twitch.tv/unigames_fin"); // missing 'http://' will cause crashed
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
         }
 
         //Detect if the fragment is for the twitter or not

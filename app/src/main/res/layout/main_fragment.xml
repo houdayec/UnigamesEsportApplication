@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +88,40 @@
                 android:paddingStart="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingBottom="@dimen/activity_horizontal_margin" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/mainIconsTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center">
+                <Button
+                    android:layout_width="170dp"
+                    android:text="Buy tickets"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:theme="@style/FlatButton"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ticket"
+                    android:layout_gravity="left"
+                    android:id="@+id/buttonTicket"/>
+                <Button
+                    android:layout_width="170dp"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:text="Apply"
+                    android:theme="@style/FlatButton"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/trophy"
+                    android:layout_gravity="right"
+                    android:id="@+id/buttonTrophy"/>
+            </LinearLayout>
+
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
