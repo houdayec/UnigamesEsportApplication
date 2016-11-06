@@ -63,13 +63,15 @@ public class BracketAdapter extends RecyclerView.Adapter<BracketAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         Match currentMatch = listMatch.get(position);
         Log.d("position", String.valueOf(position));
-        holder.dateMatch.setText(currentMatch.date);
-        holder.nameTeam1.setText(currentMatch.opponent1);
-        holder.nameTeam2.setText(currentMatch.opponent2);
-        Log.d("display", currentMatch.opponent1 + currentMatch.opponent2);
+        holder.dateMatch.setText(currentMatch.getDate());
+        holder.timeMatch.setText(currentMatch.getTime());
+        holder.nameTeam1.setText(currentMatch.getOpponent1());
+        holder.nameTeam2.setText(currentMatch.getOpponent2());
+        holder.scoreTeam1.setText(currentMatch.getOpponent1score());
+        holder.scoreTeam2.setText(currentMatch.getOpponent2score());
+        Log.d("display", currentMatch.getOpponent1() + currentMatch.getOpponent2());
 
     }
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {

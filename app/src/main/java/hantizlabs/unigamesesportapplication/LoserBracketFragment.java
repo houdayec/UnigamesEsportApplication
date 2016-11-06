@@ -59,6 +59,7 @@ public class LoserBracketFragment extends Fragment {
         // specify an adapter (see also next example)
         //mAdapter = new BracketAdapter(myDataset);
         //mRecyclerView.setAdapter(mAdapter);
+        getTournamentData();
         return rootView;
     }
     @Override

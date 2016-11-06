@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -31,6 +34,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+
+import static hantizlabs.unigamesesportapplication.Match.Bracket.LOSERS;
+import static hantizlabs.unigamesesportapplication.Match.Bracket.WINNERS;
 
 /**
  * Created by Ian on 23/09/2016.
@@ -66,13 +72,7 @@ public class WinnerBracketFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.winner_bracket_layout, container, false);
         test = (TextView) rootView.findViewById(R.id.textView);
         new TaskTournament().execute();
-        /*do{
-            //Log.d("Wait for finish", String.valueOf(Calendar.getInstance().get(Calendar.SECOND)));
-        }while(isAsyncTaskFinished != true);*/
-        //Fake populate
-        returnedListMatch.add(new Match("Mat","Corentin"));
-        returnedListMatch.add(new Match("COD","Battlefield"));
-        Toast.makeText(rootView.getContext(), "onCreate reached", Toast.LENGTH_LONG).show();
+
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Round 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Round 2"));
@@ -119,14 +119,11 @@ public class WinnerBracketFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -147,36 +144,41 @@ public class WinnerBracketFragment extends Fragment{
                     args = new Bundle();
                     args.putString("levelRound", "wround1");
                     listMatchToPass = fillListFragment(1);
-                    Log.d("listMatchToPass", String.valueOf(listMatchToPass.size()));
                     args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
                     tab1.setArguments(args);
                     return tab1;
                 case 1:
                     bracketDataFragment tab2 = new bracketDataFragment();
                     args = new Bundle();
-                    //args.putString("levelRound", "wround2");
-                    args.putString("levelRound", "wround1");
+                    args.putString("levelRound", "wround2");
+                    listMatchToPass = fillListFragment(2);
+                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
                     tab2.setArguments(args);
                     return tab2;
                 case 2:
                     bracketDataFragment tab3 = new bracketDataFragment();
                     args = new Bundle();
                     //args.putString("levelRound", "wlittleFinal");
-                    args.putString("levelRound", "wround1");
+                    args.putString("levelRound", "wround3");
+                    listMatchToPass = fillListFragment(3);
+                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
                     tab3.setArguments(args);
                     return tab3;
                 case 3:
                     bracketDataFragment tab4 = new bracketDataFragment();
                     args = new Bundle();
                     //args.putString("levelRound", "wsemiFinal");
-                    args.putString("levelRound", "wround1");
+                    args.putString("levelRound", "wround4");
+                    listMatchToPass = fillListFragment(4);
+                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
                     tab4.setArguments(args);
                     return tab4;
                 case 4:
                     bracketDataFragment tab5 = new bracketDataFragment();
                     args = new Bundle();
-                    //args.putString("levelRound", "wfinal");
-                    args.putString("levelRound", "wround1");
+                    args.putString("levelRound", "wround5");
+                    listMatchToPass = fillListFragment(5);
+                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
                     tab5.setArguments(args);
                     return tab5;
                 default:
@@ -196,174 +198,184 @@ public class WinnerBracketFragment extends Fragment{
     }
 
     private class TaskTournament extends AsyncTask<URL, Integer, String> {
-
         HttpURLConnection urlConnection = null;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
-        public TaskTournament(){
+        public TaskTournament() {
 
         }
 
         protected String doInBackground(URL... urls) {
-            Log.d("attempt", "one try");
-            String result = "";
             URL retrieveURL;
-
+            //
             try {
-
-
-                //Creation of URL - og one 57ee13fe140ba0cd2a8b4593
-                //57d6a659140ba0754b8b456a
-
-
                 retrieveURL = new URL("https://api.toornament.com/v1/tournaments/57ee13fe140ba0cd2a8b4593/matches?api_key=s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
-                //Creation of connection
                 urlConnection = (HttpURLConnection) retrieveURL.openConnection();
-                //urlConnection.setRequestProperty("X-Api-Key","s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
-                //Opening the stream
                 if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    Log.d("JSON", "connection HTTP OK");
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                    String line;
-                    StringBuilder tempResult = new StringBuilder();
-                    while ((line = reader.readLine()) != null) {
-                        tempResult.append(line);
-                        Log.d("JSON", "resultFromHTTP");
-                    }
-                    result = tempResult.toString();
-                    if (result != null) {
-                        Log.d("Result JSON :", result);
-                    } else {
-                        Log.d("JSON", "No result !");
-                    }
-                    Log.d("return list match", String.valueOf(returnedListMatch.size()));
-
-                    //return returnedListMatch;
-
+                    returnedListMatch = readJsonStream(in);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("JSON", "exception catched");
+                Log.d("JSON", "exception caught");
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
-                    Log.d("JSON", "disconnection");
                 }
-
-                return result;
             }
 
-
-        }
-        protected void onProgressUpdate(Integer... progress) {
-
-            Log.d("JSON", "task in progress");
-
+            return null;
         }
 
         protected void onPostExecute(String result) {
-
-            //resultTask = result;
-
-            //returnedListMatch = listMatch;
-            decapsulateData(result);
             isAsyncTaskFinished = true;
             pagerAdapter.notifyDataSetChanged();
-            Log.d("JSON", "task finished");
-
-            //test.setText(resultTask);
         }
     }
 
-    public ArrayList<Match> fillListFragment(int roundNumber){
-
+    public ArrayList<Match> fillListFragment(int roundNumber) {
         ArrayList<Match> filledListMatch = new ArrayList<Match>();
         Log.d("returnedListMatch", String.valueOf(returnedListMatch.size()));
         for(int i = 0; i < returnedListMatch.size(); i++){
-            Log.d("match from returned", returnedListMatch.get(i).toString());
-            filledListMatch.add(returnedListMatch.get(i));
+            if(returnedListMatch.get(i).getRound() == roundNumber) {
+                filledListMatch.add(returnedListMatch.get(i));
+            }
         }
 
         return filledListMatch;
     }
 
-    public List<Match> decapsulateData(String result){
+    public List<Match> readJsonStream(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
         try {
-
-            jsonArray = new JSONArray(result);
-
-            //test.setText("Round : " + jsonArray.getJSONObject(0).getString("round_number").toString());
-            for(int i=0; i < jsonArray.length(); i++) {
-                Log.d("One result", "beginning of decapsulation");
-                //map = new HashMap<String, String>();
-                //We verify that it's a winner bracket match (code 1)
-                if(jsonArray.getJSONObject(i).getString("group_number").toString().equals("1")){
-                    Log.d("step 1", "done");
-                    //Compare to the round passed in parameters
-                    //We select only matches corresponding to the passed round.
-                    if (jsonArray.getJSONObject(i).getString("round_number").toString().equals("1")) {
-                        Log.d("step 2", "done");
-                        currentMatch = new Match();
-                        //map.put("round_number", jsonArray.getJSONObject(i).getString("round_number"));
-                        //We modify the date into good format one part is date other one time
-                        try {
-
-                            modifiedDate = jsonArray.getJSONObject(i).getString("date").toString().split("T");
-                            //map.put("date", modifiedDate[0]);
-                            currentMatch.date = modifiedDate[0];
-                            //Now we modify the time
-                            //Log.d("date :", modifiedDate[0]);
-                            //Log.d("time :", modifiedDate[1]);
-                            modifiedTime = modifiedDate[1].split(":");
-                            hour = modifiedTime[0];
-                            minutes = modifiedTime[1];
-                            //map.put("time", hour + "h" + minutes);
-                            currentMatch.time = hour + "h" + minutes;
-                        }catch(Exception ex){
-                            currentMatch.date = "unknown";
-                            currentMatch.time = "unknown";
-                        }
-                        currentMatch.status = jsonArray.getJSONObject(i).getString("status").toString();
-
-                        allOpponents = jsonArray.getJSONObject(i).getJSONArray("opponents");
-
-                        for (int j = 0; i < allOpponents.length(); ++j) {
-                            JSONObject opponent = allOpponents.getJSONObject(i);
-                            //map.put("opponent" + j + 1 + "name", opponent.getString("participant"));
-                            //map.put("opponent" + j + 1 + "score", opponent.getString("score"));
-                            if (j == 0) {
-                                currentMatch.opponent1 = opponent.getString("participant");
-                                currentMatch.opponent1score = opponent.getString("score");
-                            } else if (j == 1) {
-                                currentMatch.opponent2 = opponent.getString("participant");
-                                currentMatch.opponent2score = opponent.getString("score");
-                            }
-                        }
-
-                        returnedListMatch.add(currentMatch);
-                    } else {
-                        //Log.d("Round", "Not corresponding to passed round");
-                        break;
-                    }
-
-
-
-                } else Log.d("step 1", "wrong stage");
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return readMatchesArray(reader);
+        } finally {
+            reader.close();
         }
-        Log.d("size return decap", String.valueOf(returnedListMatch.size()));
-        return returnedListMatch;
     }
 
+    public List<Match> readMatchesArray(JsonReader reader) throws IOException {
+        List<Match> matches = new ArrayList<>();
 
+        reader.beginArray();
+        while (reader.hasNext()) {
+            matches.add(readMatch(reader));
+        }
+        reader.endArray();
+        return matches;
+    }
+
+    public Match readMatch(JsonReader reader) throws IOException {
+        String status = null, date = null, time = null;
+        Match.Bracket bracket = null;
+        int id = -1, round = -1;
+        Match.Team team1 = null, team2 = null;
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if(reader.peek() != JsonToken.NULL) {
+                switch (name) {
+                    case "number":
+                        id = reader.nextInt();
+                        break;
+                    case "status":
+                        status = reader.nextString().toUpperCase();
+                        break;
+                    case "group_number":
+                        int groupTemp = reader.nextInt();
+                        if (groupTemp == 1) {
+                            bracket = WINNERS;
+                        } else if (groupTemp == 2) {
+                            bracket = LOSERS;
+                        }
+                        break;
+                    case "round_number":
+                        round = reader.nextInt();
+                        break;
+                    case "date":
+                        String tempDateRaw = reader.nextString();
+                        String[] tempDate = tempDateRaw.split("T");
+                        String[] tempTime = tempDate[1].split(":");
+
+                        date = tempDate[0];
+                        time = tempTime[0] + ":" + tempTime[1];
+                        break;
+                    case "opponents":
+                        int counter = 0;
+                        reader.beginArray();
+                        while (reader.hasNext()) {
+                            if (counter == 0) {
+                                team1 = readTeam(reader);
+                            } else {
+                                team2 = readTeam(reader);
+                            }
+                            counter++;
+                        }
+                        reader.endArray();
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
+            }
+            else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return new Match(team1, team2, id, round, bracket, status, date, time);
+    }
+
+    public Match.Team readTeam(JsonReader reader) throws IOException {
+        String teamName = null;
+        int score = -1;
+        boolean winner = false;
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if(reader.peek() != JsonToken.NULL) {
+                switch (name) {
+                    case "participant":
+                        if(reader.peek() == JsonToken.STRING) {
+                            teamName = reader.nextString();
+                        }
+                        else if(reader.peek() == JsonToken.BEGIN_OBJECT) {
+                            reader.beginObject();
+                            while(reader.hasNext()) {
+                                String nameInParticipant = reader.nextName();
+                                if(nameInParticipant.equals("name")) {
+                                    teamName = reader.nextString();
+                                }
+                                else {
+                                    reader.skipValue();
+                                }
+                            }
+                            reader.endObject();
+                        }
+                        break;
+                    case "score":
+                        score = reader.nextInt();
+                        break;
+                    case "result":
+                        winner = reader.nextInt() == 1;
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
+            }
+            else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+
+        return new Match.Team(teamName, score, winner);
+    }
 }
