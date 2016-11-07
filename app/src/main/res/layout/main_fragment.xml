@@ -100,7 +100,8 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ticket"
                     android:layout_gravity="left"
-                    android:id="@+id/buttonTicket"/>
+                    android:id="@+id/buttonTicket"
+                    android:layout_margin="10dp"/>
                 <Button
                     android:layout_width="170dp"
                     android:textColor="@color/white"
@@ -110,7 +111,8 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/trophy"
                     android:layout_gravity="right"
-                    android:id="@+id/buttonTrophy"/>
+                    android:id="@+id/buttonTrophy"
+                    android:layout_margin="10dp"/>
             </LinearLayout>
 
 
