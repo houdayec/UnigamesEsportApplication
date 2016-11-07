@@ -17,10 +17,10 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:background="#F2F2F2"
-            android:layout_height="150dp">
+            android:layout_height="160dp">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="30dp"
                 android:orientation="horizontal"
                 android:background="#F2F2F2">
                 <TextView
