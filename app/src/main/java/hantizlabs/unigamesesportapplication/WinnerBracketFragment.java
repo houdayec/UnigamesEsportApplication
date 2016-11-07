@@ -76,9 +76,13 @@ public class WinnerBracketFragment extends Fragment{
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Round 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Round 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Round 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Round 4"));
         tabLayout.addTab(tabLayout.newTab().setText("Little final"));
         tabLayout.addTab(tabLayout.newTab().setText("Semi final"));
         tabLayout.addTab(tabLayout.newTab().setText("Final"));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
 
