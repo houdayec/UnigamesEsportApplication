@@ -16,76 +16,48 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import static hantizlabs.unigamesesportapplication.Match.Bracket.LOSERS;
 import static hantizlabs.unigamesesportapplication.Match.Bracket.WINNERS;
 
 /**
- * Created by Ian on 23/09/2016.
+ * Winner Bracket Fragment
  */
-public class WinnerBracketFragment extends Fragment{
-
-    TextView test;
-    String resultTask = "";
-    BracketAdapter bracketAdapter;
-    PagerAdapter pagerAdapter;
-    List<Match> returnedListMatch = new ArrayList<Match>();
+public class WinnerBracketFragment extends Fragment {
+    private PagerAdapter pagerAdapter;
+    private List<Match> returnedListMatch = new ArrayList<>();
     boolean isAsyncTaskFinished = false;
-    JSONArray jsonArray;
-    HashMap<String, String> map;
-    String round ="";
-    JSONArray allOpponents;
-    String modifiedDate[];
-    String modifiedTime[];
-    String hour;
-    String minutes;
-    Match currentMatch;
 
     public List<Match> getReturnedListMatch() {
         return returnedListMatch;
     }
 
-    public void setReturnedListMatch(List<Match> returnedListMatch) {
-        this.returnedListMatch = returnedListMatch;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.winner_bracket_layout, container, false);
-        test = (TextView) rootView.findViewById(R.id.textView);
         new TaskTournament().execute();
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Round 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Round 2"));
         tabLayout.addTab(tabLayout.newTab().setText("Round 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("Round 4"));
-        tabLayout.addTab(tabLayout.newTab().setText("Little final"));
-        tabLayout.addTab(tabLayout.newTab().setText("Semi final"));
+        tabLayout.addTab(tabLayout.newTab().setText("Quarterfinal"));
+        tabLayout.addTab(tabLayout.newTab().setText("Semifinal"));
         tabLayout.addTab(tabLayout.newTab().setText("Final"));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
-
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -117,7 +89,7 @@ public class WinnerBracketFragment extends Fragment{
         if (getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = ((AppCompatActivity) getActivity());
             if (activity.getSupportActionBar() != null)
-                activity.getSupportActionBar().setTitle("Winners Bracket");
+                activity.getSupportActionBar().setTitle("Winners' bracket");
         }
     }
     @Override
@@ -133,7 +105,7 @@ public class WinnerBracketFragment extends Fragment{
     public class PagerAdapter extends FragmentStatePagerAdapter {
         int mNumOfTabs;
 
-        public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+        PagerAdapter(FragmentManager fm, int NumOfTabs) {
             super(fm);
             this.mNumOfTabs = NumOfTabs;
         }
@@ -142,52 +114,19 @@ public class WinnerBracketFragment extends Fragment{
         public Fragment getItem(int position) {
             Bundle args;
             List<Match> listMatchToPass;
-            switch (position) {
-                case 0:
-                    bracketDataFragment tab1 = new bracketDataFragment();
-                    args = new Bundle();
-                    args.putString("levelRound", "wround1");
-                    listMatchToPass = fillListFragment(1);
-                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
-                    tab1.setArguments(args);
-                    return tab1;
-                case 1:
-                    bracketDataFragment tab2 = new bracketDataFragment();
-                    args = new Bundle();
-                    args.putString("levelRound", "wround2");
-                    listMatchToPass = fillListFragment(2);
-                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
-                    tab2.setArguments(args);
-                    return tab2;
-                case 2:
-                    bracketDataFragment tab3 = new bracketDataFragment();
-                    args = new Bundle();
-                    //args.putString("levelRound", "wlittleFinal");
-                    args.putString("levelRound", "wround3");
-                    listMatchToPass = fillListFragment(3);
-                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
-                    tab3.setArguments(args);
-                    return tab3;
-                case 3:
-                    bracketDataFragment tab4 = new bracketDataFragment();
-                    args = new Bundle();
-                    //args.putString("levelRound", "wsemiFinal");
-                    args.putString("levelRound", "wround4");
-                    listMatchToPass = fillListFragment(4);
-                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
-                    tab4.setArguments(args);
-                    return tab4;
-                case 4:
-                    bracketDataFragment tab5 = new bracketDataFragment();
-                    args = new Bundle();
-                    args.putString("levelRound", "wround5");
-                    listMatchToPass = fillListFragment(5);
-                    args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
-                    tab5.setArguments(args);
-                    return tab5;
-                default:
-                    return null;
+            List<bracketDataFragment> tabs = new ArrayList<>();
+
+            for(int i=1; i<=6; i++) {
+                bracketDataFragment tab = new bracketDataFragment();
+                args = new Bundle();
+                args.putString("levelRound", "wround"+i);
+                listMatchToPass = fillListFragment(i);
+                args.putParcelableArrayList("passedList", (ArrayList<? extends Parcelable>) listMatchToPass);
+                tab.setArguments(args);
+                tabs.add(tab);
             }
+            if(position < 6) return tabs.get(position);
+            else return null;
         }
 
         @Override
@@ -209,9 +148,7 @@ public class WinnerBracketFragment extends Fragment{
             super.onPreExecute();
         }
 
-        public TaskTournament() {
-
-        }
+        TaskTournament() {}
 
         protected String doInBackground(URL... urls) {
             URL retrieveURL;
@@ -242,10 +179,10 @@ public class WinnerBracketFragment extends Fragment{
     }
 
     public ArrayList<Match> fillListFragment(int roundNumber) {
-        ArrayList<Match> filledListMatch = new ArrayList<Match>();
+        ArrayList<Match> filledListMatch = new ArrayList<>();
         Log.d("returnedListMatch", String.valueOf(returnedListMatch.size()));
         for(int i = 0; i < returnedListMatch.size(); i++){
-            if(returnedListMatch.get(i).getRound() == roundNumber) {
+            if(returnedListMatch.get(i).getRound() == roundNumber && returnedListMatch.get(i).getBracket() == WINNERS) {
                 filledListMatch.add(returnedListMatch.get(i));
             }
         }
