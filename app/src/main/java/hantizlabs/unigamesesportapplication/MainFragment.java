@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -41,9 +42,28 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
 
         buttonTicket = (Button) rootView.findViewById(R.id.buttonTicket);
-
-
         buttonTrophy = (Button) rootView.findViewById(R.id.buttonTrophy);
+
+        WebView view = (WebView) rootView.findViewById(R.id.webViewEvent);
+        String text;
+        text = "<html><body><p align=\"justify\">";
+        text+= "Unigames is a new gaming event for all university students in Helsinki metropolitan area.\n" +
+                "        We challenge you and your friends in your favorite games! The stake is nothing more and nothing less than glory,\n" +
+                "        topped with awesome prizes! For the most enthusiastic gamers we offer a corner to sleep in and a spot for\n" +
+                "        a computer in a LAN-party for the whole weekend. The grande finale is the League of Legends championship tournament,\n" +
+                "        where the true sportsmanship is measured! There will be blood, sweat, and salt!";
+        text+= "</p></body></html>";
+        view.loadData(text, "text/html", "utf-8");
+
+        WebView view2 = (WebView) rootView.findViewById(R.id.webViewLAN);
+        String text2;
+        text2 = "<html><body><p align=\"justify\">";
+        text2+= "The heart of the two days party are of course you – the game enthusiasts who live to play! Bring your battle stations, grab your friends and be ready to have fun!\n" +
+                "        The ticket includes one gaming place, right to use the sleeping area and limitless internet at the venue. Naturally access to the whole event, not just the LAN area, is included.\n" +
+                "        More information coming soon!";
+        text2+= "</p></body></html>";
+        view2.loadData(text2, "text/html", "utf-8");
+
 
         /*
         //Loading the webview to justify content
@@ -65,6 +85,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         */
         return rootView;
     }
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

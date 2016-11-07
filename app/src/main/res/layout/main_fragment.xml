@@ -54,7 +54,7 @@
         >
         <LinearLayout
             android:id="@+id/textLayout"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:orientation="vertical">
 
@@ -64,30 +64,22 @@
                 android:padding="16dp"
                 android:text="@string/welcome"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:text="@string/event"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingBottom="@dimen/activity_horizontal_margin" />
+            <WebView
+                android:id="@+id/webViewEvent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/lantitle"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:text="@string/lanparty"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingBottom="@dimen/activity_horizontal_margin" />
+            <WebView
+                android:id="@+id/webViewLAN"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
