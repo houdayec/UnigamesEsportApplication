@@ -2,10 +2,10 @@ package hantizlabs.unigamesesportapplication;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity
 
     public MainActivity(){
 
-    };
+    }
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "uvdNwVHI3i8FaEyXKH5ZXpHPi";
@@ -106,9 +108,15 @@ public class MainActivity extends AppCompatActivity
             twitterFrag = new NewsFragment();
             isTwitterFrag = true;
         } else if (id == R.id.nav_winner_bracket) {
-            fragment = new WinnerBracketFragment();
+            fragment = new BracketFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("isWinnerBracket", true);
+            fragment.setArguments(args);
         } else if (id == R.id.nav_loser_bracket) {
-            fragment = new LoserBracketFragment();
+            fragment = new BracketFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("isWinnerBracket", false);
+            fragment.setArguments(args);
         } else if (id == R.id.nav_teams) {
             fragment = new TeamFragment();
         } else if (id == R.id.nav_stream) {

@@ -7,20 +7,7 @@ import android.os.Parcelable;
  * Created by Corentin on 25/10/2016.
  */
 
-
 class Match implements Parcelable {
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    enum Bracket {
-        WINNERS, LOSERS
-    }
-
     static class Team {
         private String teamName;
         private int score;
@@ -32,52 +19,44 @@ class Match implements Parcelable {
             this.winner = winner;
         }
 
-        public int getScore() {
+        int getScore() {
             return score;
         }
 
-        public void setScore(int score) {
-            this.score = score;
-        }
-
-        public String getTeamName() {
+        String getTeamName() {
             return teamName;
-        }
-
-        public void setTeamName(String teamName) {
-            this.teamName = teamName;
         }
 
         public boolean isWinner() {
             return winner;
         }
-
-        public void setWinner(boolean winner) {
-            this.winner = winner;
-        }
     }
 
     private String date;
-
     private String time;
-
     private String opponent1;
-
     private String opponent2;
-
     private String opponent1score;
-
     private String opponent2score;
-
     private String status;
-
     private int round;
-
     private int id;
-
     private Bracket bracket;
 
-    protected Match(Parcel in) {
+    Match(Team team1, Team team2, int id, int round, Bracket bracket, String status, String date, String time) {
+        this.opponent1 = team1.getTeamName();
+        this.opponent1score = Integer.toString(team1.getScore());
+        this.opponent2 = team2.getTeamName();
+        this.opponent2score = Integer.toString(team2.getScore());
+        this.status = status;
+        this.round = round;
+        this.bracket = bracket;
+        this.date = date;
+        this.time = time;
+        this.id = id;
+    }
+
+    private Match(Parcel in) {
         id = in.readInt();
         date = in.readString();
         time = in.readString();
@@ -101,44 +80,24 @@ class Match implements Parcelable {
         }
     };
 
-    public Bracket getBracket() {
+    Bracket getBracket() {
         return bracket;
     }
 
-    public void setBracket(Bracket bracket) {
-        this.bracket = bracket;
-    }
-
-    public String getTime() {
+    String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getOpponent1() {
+    String getOpponent1() {
         return opponent1;
     }
 
-    public void setOpponent1(String opponent1) {
-        this.opponent1 = opponent1;
-    }
-
-    public String getOpponent1score() {
+    String getOpponent1score() {
         return opponent1score;
     }
 
-    public void setOpponent1score(String opponent1score) {
-        this.opponent1score = opponent1score;
-    }
-
-    public String getOpponent2score() {
+    String getOpponent2score() {
         return opponent2score;
-    }
-
-    public void setOpponent2score(String opponent2score) {
-        this.opponent2score = opponent2score;
     }
 
     public String getStatus() {
@@ -149,46 +108,23 @@ class Match implements Parcelable {
         this.status = status;
     }
 
-    public int getRound() {
+    int getRound() {
         return round;
     }
 
-    public void setRound(int round) {
-        this.round = round;
-    }
-
-    public String getOpponent2() {
+    String getOpponent2() {
         return opponent2;
     }
 
-    public void setOpponent2(String opponent2) {
-        this.opponent2 = opponent2;
-    }
-
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public int getId() {
+        return id;
     }
 
-    public Match(String opponent1, String opponent2) {
-        this.opponent1 = opponent1;
-        this.opponent2 = opponent2;
-    }
-
-
-    public Match(Team team1, Team team2, int id, int round, Bracket bracket, String status, String date, String time) {
-        this.opponent1 = team1.getTeamName();
-        this.opponent1score = Integer.toString(team1.getScore());
-        this.opponent2 = team2.getTeamName();
-        this.opponent2score = Integer.toString(team2.getScore());
-        this.status = status;
-        this.round = round;
-        this.bracket = bracket;
-        this.date = date;
-        this.time = time;
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -202,7 +138,6 @@ class Match implements Parcelable {
         dest.writeString(opponent2score);
         dest.writeString(status);
         dest.writeInt(round);
-
     }
 
     public int describeContents() {
