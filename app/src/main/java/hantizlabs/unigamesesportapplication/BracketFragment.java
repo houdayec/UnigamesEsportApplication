@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.util.JsonToken;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +38,11 @@ public class BracketFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.bracket_layout, container, false);
-        new TaskTournament().execute();
-        Bundle args = getArguments();
+        new TaskTournament().execute(); //gets JSON data from toornament API
 
+        //thanks to this we only need single class for both brackets
+        //basically we configure how should the fragment content behave based on its type
+        Bundle args = getArguments();
         if((boolean)args.get("isWinnerBracket")) {
             numberedRounds = 3;
             allRounds = 6;
@@ -53,6 +54,7 @@ public class BracketFragment extends Fragment {
             bracket = Bracket.LOSERS;
         }
 
+        //adds correct amount of tabs to fragment + Grand Final if Winner's bracket
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
         for(int i=1; i<=numberedRounds; i++) tabLayout.addTab(tabLayout.newTab().setText("Round " + i));
         tabLayout.addTab(tabLayout.newTab().setText("Quarterfinal"));
@@ -64,6 +66,7 @@ public class BracketFragment extends Fragment {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
 
+        //adapter for pages with data
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         pagerAdapter = new PagerAdapter(getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
@@ -95,9 +98,9 @@ public class BracketFragment extends Fragment {
             AppCompatActivity activity = ((AppCompatActivity) getActivity());
             if (activity.getSupportActionBar() != null) {
                 if (bracket == Bracket.WINNERS)
-                    activity.getSupportActionBar().setTitle("Winners' bracket");
+                    activity.getSupportActionBar().setTitle(R.string.wbracket);
                 else
-                    activity.getSupportActionBar().setTitle("Losers' bracket");
+                    activity.getSupportActionBar().setTitle(R.string.lbracket);
             }
         }
     }
@@ -126,6 +129,7 @@ public class BracketFragment extends Fragment {
             List<Match> listMatchToPass;
             List<bracketDataFragment> tabs = new ArrayList<>();
 
+            //fills each tab with correct data
             for(int i=1; i<=allRounds; i++) {
                 bracketDataFragment tab = new bracketDataFragment();
                 args = new Bundle();
@@ -134,7 +138,7 @@ public class BracketFragment extends Fragment {
                 tab.setArguments(args);
                 tabs.add(tab);
             }
-            if(bracket == Bracket.WINNERS) {
+            if(bracket == Bracket.WINNERS) { //grand final case
                 bracketDataFragment tab = new bracketDataFragment();
                 args = new Bundle();
                 listMatchToPass = fillListFragment(1, Bracket.GRANDFINAL);
@@ -190,7 +194,6 @@ public class BracketFragment extends Fragment {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("JSON", "exception caught");
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
@@ -204,6 +207,7 @@ public class BracketFragment extends Fragment {
             pagerAdapter.notifyDataSetChanged();
         }
 
+        //JSON Reader magic
         List<Match> readJsonStream(InputStream in) throws IOException {
             JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
             try {
@@ -290,7 +294,7 @@ public class BracketFragment extends Fragment {
 
         Match.Team readTeam(JsonReader reader) throws IOException {
             String teamName = null;
-            int score = -1;
+            int score = 0;
             boolean winner = false;
 
             reader.beginObject();
