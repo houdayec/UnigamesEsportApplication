@@ -25,7 +25,7 @@
         android:alpha="0.3"
         android:background="@android:color/transparent" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tile_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tile_height"
@@ -34,6 +34,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/article_titles"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
 </RelativeLayout>
