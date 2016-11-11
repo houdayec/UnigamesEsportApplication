@@ -44,13 +44,13 @@ public class BracketFragment extends Fragment {
         //basically we configure how should the fragment content behave based on its type
         Bundle args = getArguments();
         if((boolean)args.get("isWinnerBracket")) {
-            numberedRounds = 3;
-            allRounds = 6;
+            numberedRounds = 1;
+            allRounds = 4;
             bracket = Bracket.WINNERS;
         }
         else {
-            numberedRounds = 7;
-            allRounds = 10;
+            numberedRounds = 3;
+            allRounds = 6;
             bracket = Bracket.LOSERS;
         }
 
