@@ -44,13 +44,13 @@ public class BracketFragment extends Fragment {
         //basically we configure how should the fragment content behave based on its type
         Bundle args = getArguments();
         if((boolean)args.get("isWinnerBracket")) {
-            numberedRounds = 1;
-            allRounds = 4;
+            numberedRounds = 0;
+            allRounds = 3;
             bracket = Bracket.WINNERS;
         }
         else {
-            numberedRounds = 3;
-            allRounds = 6;
+            numberedRounds = 1;
+            allRounds = 4;
             bracket = Bracket.LOSERS;
         }
 
@@ -186,7 +186,7 @@ public class BracketFragment extends Fragment {
             URL retrieveURL;
 
             try {
-                retrieveURL = new URL("https://api.toornament.com/v1/tournaments/57ee13fe140ba0cd2a8b4593/matches?api_key=s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
+                retrieveURL = new URL("https://api.toornament.com/v1/tournaments/57cd7725140ba0a80f8b4567/matches?api_key=s9D-UXBYy9qqZz4Mk8Bs55UbFqQkIRikoIuFdUGHQLk");
                 urlConnection = (HttpURLConnection) retrieveURL.openConnection();
                 if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());

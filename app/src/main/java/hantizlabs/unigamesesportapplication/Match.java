@@ -44,9 +44,9 @@ class Match implements Parcelable {
     private Bracket bracket;
 
     Match(Team team1, Team team2, int id, int round, Bracket bracket, String status, String date, String time) {
-        this.opponent1 = team1.getTeamName();
+        this.opponent1 = team1.getTeamName() == null ? "TBD" : team1.getTeamName();
         this.opponent1score = Integer.toString(team1.getScore());
-        this.opponent2 = team2.getTeamName();
+        this.opponent2 = team2.getTeamName() == null ? "TBD" : team2.getTeamName();
         this.opponent2score = Integer.toString(team2.getScore());
         this.status = status;
         this.round = round;
