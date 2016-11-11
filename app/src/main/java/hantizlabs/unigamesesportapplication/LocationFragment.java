@@ -42,6 +42,7 @@ public class LocationFragment extends Fragment {
             e.printStackTrace();
         }
 
+        //Display and pin the position of the university on the map loading
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -61,10 +62,13 @@ public class LocationFragment extends Fragment {
                         .newCameraPosition(cameraPosition));
 
                 uiSettings = googleMap.getUiSettings();
+
+                //Allow the user to zoom the map
                 uiSettings.setZoomGesturesEnabled(true);
             }
         });
 
+        //Implementation of the floating button and launch navigation when get clicked
         FloatingActionButton fabNavigate = (FloatingActionButton) rootView.findViewById(R.id.fabNavigate);
         fabNavigate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -77,6 +81,7 @@ public class LocationFragment extends Fragment {
         return rootView;
     }
 
+    //Modifying the fragment title
     @Override
     public void onResume() {
         super.onResume();
@@ -89,6 +94,8 @@ public class LocationFragment extends Fragment {
         }
     }
 
+
+    //Handle different fragment states and adapt the map
     @Override
     public void onPause() {
         super.onPause();

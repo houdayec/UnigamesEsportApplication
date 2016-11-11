@@ -58,7 +58,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         WebView view2 = (WebView) rootView.findViewById(R.id.webViewLAN);
         String text2;
         text2 = "<html><body><p align=\"justify\">";
-        text2+= "The heart of the two days party are of course you – the game enthusiasts who live to play! Bring your battle stations, grab your friends and be ready to have fun!\n" +
+        text2+= "The heart of the two days party are of course you ! Bring your battle stations, grab your friends and be ready to have fun!\n" +
                 "        The ticket includes one gaming place, right to use the sleeping area and limitless internet at the venue. Naturally access to the whole event, not just the LAN area, is included.\n" +
                 "        More information coming soon!";
         text2+= "</p></body></html>";

@@ -33,36 +33,42 @@ import static android.content.Intent.getIntent;
  */
 
 public class ListTeamFragment extends DialogFragment {
-    String[] teamMembers={"Tima","Guntab","Cartim","Devis","Francis"};//getActivity().getIntent().getExtras().getStringArrayList("members");
+
+    //Creation of teams
+    String[] teamMembers={"Tima","Guntab","Cartim","Devis","Francis"};
     String[] teamMembers2={"Tima2","Guntab2","Cartim2","Devis2","Francis2"};
     private StaggeredGridLayoutManager gridPlayers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view= (View)inflater.inflate(R.layout.players_of_team_fragment, container, false);
-
-
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.players);
         recyclerView.setHasFixedSize(true);
 
         gridPlayers = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridPlayers);
 
-        //ArrayList<String> playersList = getListItemData();
-        final Button button = (Button)view.findViewById(R.id.close_button);
 
+        final Button button = (Button)view.findViewById(R.id.close_button);
+        //Listening the button
+        /*
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
                 getDialog().dismiss();
             }
         });
+        */
 
         TeamsRecyclerViewAdapter rcAdapter;
+        //Reuse same fragment with bundle
         Bundle bundle=this.getArguments();
+        //Retrieve the key passed from the TeamFragment
         int key=bundle.getInt("Teams");
         Log.d("Key value", String.valueOf(key));
         switch (key){
+            //Depending on the key we display different team information
             case 1:
                 rcAdapter= new TeamsRecyclerViewAdapter(getContext(),teamMembers);
                 recyclerView.setAdapter(rcAdapter);
@@ -74,11 +80,10 @@ public class ListTeamFragment extends DialogFragment {
                 getDialog().setTitle("Team Members");
                 break;
         }
-
-        //TextView listView = (TextView) view.findViewById(R.id.textexample);
-
         return view;
     }
+
+    //Size of dialog
     @Override
     public void onResume() {
         super.onResume();
@@ -87,7 +92,7 @@ public class ListTeamFragment extends DialogFragment {
         getDialog().getWindow().setLayout(width, height);
     }
 
-
+    //Creation of adapter for displaying members information in recycler view
     public class TeamsRecyclerViewAdapter  extends RecyclerView.Adapter<TeamsViewHolders> {
         Context ctx;
         String[] teamMembers;
@@ -132,6 +137,8 @@ public class ListTeamFragment extends DialogFragment {
             return teamMembers.length;
         }
     }
+
+
     public class TeamsViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         public TeamsViewHolders(View itemView) {

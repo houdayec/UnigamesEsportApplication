@@ -86,29 +86,7 @@ public class TeamFragment extends Fragment {
                     bundle.putInt("Teams",1);
                     dialogFragment.setArguments(bundle);
                     dialogFragment.show(fm, "Sample Fragment");
-                    /*FragmentManager fm = getFragmentManager();
-                    ListTeamFragment dialogFragment = new ListTeamFragment ();
-                    bundle.putInt("Teams",2);
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(fm, "Sample Fragment");*/
-                    /*AlertDialog.Builder builderSingle = new AlertDialog.Builder(getContext());
-                    LayoutInflater inflater2 = getLayoutInflater(null);
-                    View v=inflater2.inflate(R.layout.title_dialog, null);
-                    builderSingle.setCustomTitle(v);
-                    // builderSingle.setTitle("Team Members");
-                    builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
 
-                    builderSingle.setAdapter(new AdapterList(getContext(),valuesT1,positionsT1), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });;
-                    builderSingle.show();*/
                 }
                 if(aux.getName().equals("Team3")){
                     FragmentManager fm = getFragmentManager();
@@ -116,11 +94,7 @@ public class TeamFragment extends Fragment {
                     bundle.putInt("Teams",1);
                     dialogFragment.setArguments(bundle);
                     dialogFragment.show(fm, "Sample Fragment");
-                    /*FragmentManager fm = getFragmentManager();
-                    TeamsDialog dialogFragment = new TeamsDialog ();
-                    bundle.putInt("Teams",2);
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(fm, "Sample Fragment");*/
+
                 }
                 if(aux.getName().equals("Team4")){
                     FragmentManager fm = getFragmentManager();
@@ -135,11 +109,7 @@ public class TeamFragment extends Fragment {
                     bundle.putInt("Teams",1);
                     dialogFragment.setArguments(bundle);
                     dialogFragment.show(fm, "Sample Fragment");
-                    /*FragmentManager fm = getFragmentManager();
-                    ListTeamFragment dialogFragment = new ListTeamFragment ();
-                    bundle.putInt("Teams",2);
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(fm, "Sample Fragment");*/
+
                 }
                 if(aux.getName().equals("Team6")){
                     FragmentManager fm = getFragmentManager();
@@ -147,13 +117,8 @@ public class TeamFragment extends Fragment {
                     bundle.putInt("Teams",2);
                     dialogFragment.setArguments(bundle);
                     dialogFragment.show(fm, "Sample Fragment");
-                    /*FragmentManager fm = getFragmentManager();
-                    ListTeamFragment dialogFragment = new ListTeamFragment ();
-                    bundle.putInt("Teams",2);
-                    dialogFragment.setArguments(bundle);
-                    dialogFragment.show(fm, "Sample Fragment");*/
+
                 }
-                //
             }
         });
         return view;

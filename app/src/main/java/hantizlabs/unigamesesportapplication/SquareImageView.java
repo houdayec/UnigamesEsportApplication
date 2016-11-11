@@ -10,6 +10,7 @@ import android.widget.ImageView;
  * Created by Ian on 30/09/2016.
  */
 
+//Custom image for displaying the team logos
 public class SquareImageView extends ImageView {
     public SquareImageView(Context context) {
         super(context);

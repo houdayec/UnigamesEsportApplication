@@ -17,10 +17,10 @@ public class TwitchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.twitch_fragment, container, false);
 
+        //Displaying the stream in general way to have choice between app to watch the stream
         String url = "http://twitch.tv/unigames_fin/embed";
         WebView mWebView;
         mWebView = (WebView) rootView.findViewById(R.id.webViewTwitch);
-        //mWebView.setWebChromeClient(new WebChromeClient());
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);

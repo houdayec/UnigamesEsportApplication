@@ -34,10 +34,11 @@ public class NewsFragment extends ListFragment{
         //Get the swiperefresh in the view
         final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh);
 
+        //Implementation of the swipe refresh pull action
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override public void onRefresh() {
 
-
+                //Calling a new task provided by Fabric plugin and refresh tweets
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         mSwipeRefreshLayout.setRefreshing(false);
@@ -74,6 +75,7 @@ public class NewsFragment extends ListFragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Calling tweet feed from Fabric and use the adapter to display it using already determined layouts
         final UserTimeline userTimeline = new UserTimeline.Builder()
                 .screenName("Unigames_FIN")
                 .build();
