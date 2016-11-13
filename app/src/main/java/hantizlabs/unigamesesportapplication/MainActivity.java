@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,7 +22,7 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public MainActivity(){
+    public MainActivity() {
 
     }
 
@@ -128,10 +127,10 @@ public class MainActivity extends AppCompatActivity
         }
 
         //Detect if the fragment is for the twitter or not
-        if(!isTwitterFrag){
+        if (!isTwitterFrag) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainContent, fragment).commit();
-        }else{
+        } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainContent, twitterFrag).commit();
         }

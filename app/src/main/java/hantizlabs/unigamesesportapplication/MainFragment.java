@@ -13,7 +13,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -21,6 +20,7 @@ import android.widget.Button;
 
 /**
  * Created by Ian on 23/09/2016.
+ * Fragment for main
  */
 public class MainFragment extends Fragment implements View.OnClickListener {
 
@@ -40,28 +40,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         });
 
 
-
         buttonTicket = (Button) rootView.findViewById(R.id.buttonTicket);
         buttonTrophy = (Button) rootView.findViewById(R.id.buttonTrophy);
 
         WebView view = (WebView) rootView.findViewById(R.id.webViewEvent);
         String text;
         text = "<html><body><p align=\"justify\">";
-        text+= "Unigames is a new gaming event for all university students in Helsinki metropolitan area.\n" +
+        text += "Unigames is a new gaming event for all university students in Helsinki metropolitan area.\n" +
                 "        We challenge you and your friends in your favorite games! The stake is nothing more and nothing less than glory,\n" +
                 "        topped with awesome prizes! For the most enthusiastic gamers we offer a corner to sleep in and a spot for\n" +
                 "        a computer in a LAN-party for the whole weekend. The grande finale is the League of Legends championship tournament,\n" +
                 "        where the true sportsmanship is measured! There will be blood, sweat, and salt!";
-        text+= "</p></body></html>";
+        text += "</p></body></html>";
         view.loadData(text, "text/html", "utf-8");
 
         WebView view2 = (WebView) rootView.findViewById(R.id.webViewLAN);
         String text2;
         text2 = "<html><body><p align=\"justify\">";
-        text2+= "The heart of the two days party are of course you ! Bring your battle stations, grab your friends and be ready to have fun!\n" +
+        text2 += "The heart of the two days party are of course you ! Bring your battle stations, grab your friends and be ready to have fun!\n" +
                 "        The ticket includes one gaming place, right to use the sleeping area and limitless internet at the venue. Naturally access to the whole event, not just the LAN area, is included.\n" +
                 "        More information coming soon!";
-        text2+= "</p></body></html>";
+        text2 += "</p></body></html>";
         view2.loadData(text2, "text/html", "utf-8");
 
 
@@ -87,7 +86,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         boolean testConnection = isConnected(getContext());
@@ -95,10 +93,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.buttonTicket:
                 buttonTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,7 +112,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     public void onClick(View v) {
                         Uri uri = Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSdHdzv9LFDLW98f7eX6TNpK1Fmm1h0ipX9-9h3CUBDt-00-mg/viewform?embedded=true"); // missing 'http://' will cause crashed
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);;
+                        startActivity(intent);
                     }
                 });
                 break;
@@ -148,8 +144,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void showDialog()
-    {
+    private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("You need an internet connection to run the application.")
                 .setCancelable(false)

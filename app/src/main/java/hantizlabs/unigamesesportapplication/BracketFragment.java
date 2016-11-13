@@ -26,11 +26,11 @@ import java.util.List;
 
 /**
  * Created by Pawel on 08.11.2016.
+ * Fragment for both brackets
  */
 
 public class BracketFragment extends Fragment {
-    int numberedRounds;
-    private int allRounds;
+    private int rounds;
     private Bracket bracket;
     private List<Match> matchList = new ArrayList<>();
     PagerAdapter pagerAdapter;
@@ -43,24 +43,22 @@ public class BracketFragment extends Fragment {
         //thanks to this we only need single class for both brackets
         //basically we configure how should the fragment content behave based on its type
         Bundle args = getArguments();
-        if((boolean)args.get("isWinnerBracket")) {
-            numberedRounds = 0;
-            allRounds = 3;
+        if ((boolean) args.get("isWinnerBracket")) {
+            rounds = 3;
             bracket = Bracket.WINNERS;
-        }
-        else {
-            numberedRounds = 1;
-            allRounds = 4;
+        } else {
+            rounds = 4;
             bracket = Bracket.LOSERS;
         }
 
         //adds correct amount of tabs to fragment + Grand Final if Winner's bracket
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
-        for(int i=1; i<=numberedRounds; i++) tabLayout.addTab(tabLayout.newTab().setText("Round " + i));
+        for (int i = 1; i <= rounds - 3; i++) // rounds-3 because there are 3 named phases
+            tabLayout.addTab(tabLayout.newTab().setText("Round " + i));
         tabLayout.addTab(tabLayout.newTab().setText("Quarterfinal"));
         tabLayout.addTab(tabLayout.newTab().setText("Semifinal"));
         tabLayout.addTab(tabLayout.newTab().setText("Final"));
-        if(bracket == Bracket.WINNERS)
+        if (bracket == Bracket.WINNERS)
             tabLayout.addTab(tabLayout.newTab().setText("Grand Final"));
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -81,10 +79,12 @@ public class BracketFragment extends Fragment {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
 
         return rootView;
@@ -130,7 +130,7 @@ public class BracketFragment extends Fragment {
             List<bracketDataFragment> tabs = new ArrayList<>();
 
             //fills each tab with correct data
-            for(int i=1; i<=allRounds; i++) {
+            for (int i = 1; i <= rounds; i++) {
                 bracketDataFragment tab = new bracketDataFragment();
                 args = new Bundle();
                 listMatchToPass = fillListFragment(i, bracket);
@@ -138,7 +138,7 @@ public class BracketFragment extends Fragment {
                 tab.setArguments(args);
                 tabs.add(tab);
             }
-            if(bracket == Bracket.WINNERS) { //grand final case
+            if (bracket == Bracket.WINNERS) { //grand final case
                 bracketDataFragment tab = new bracketDataFragment();
                 args = new Bundle();
                 listMatchToPass = fillListFragment(1, Bracket.GRANDFINAL);
@@ -163,8 +163,8 @@ public class BracketFragment extends Fragment {
     public ArrayList<Match> fillListFragment(int roundNumber, Bracket bracket) {
         ArrayList<Match> filledListMatch = new ArrayList<>();
 
-        for(int i = 0; i < matchList.size(); i++){
-            if(matchList.get(i).getRound() == roundNumber && matchList.get(i).getBracket() == bracket) {
+        for (int i = 0; i < matchList.size(); i++) {
+            if (matchList.get(i).getRound() == roundNumber && matchList.get(i).getBracket() == bracket) {
                 filledListMatch.add(matchList.get(i));
             }
         }
@@ -180,7 +180,8 @@ public class BracketFragment extends Fragment {
             super.onPreExecute();
         }
 
-        TaskTournament() {}
+        TaskTournament() {
+        }
 
         protected String doInBackground(URL... urls) {
             URL retrieveURL;
@@ -208,6 +209,8 @@ public class BracketFragment extends Fragment {
         }
 
         //JSON Reader magic
+        //https://developer.android.com/reference/android/util/JsonReader.html
+
         List<Match> readJsonStream(InputStream in) throws IOException {
             JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
             try {
@@ -229,7 +232,7 @@ public class BracketFragment extends Fragment {
         }
 
         Match readMatch(JsonReader reader) throws IOException {
-            String status = null, date = null, time = null;
+            String date = null, time = null;
             Bracket bracket = null;
             int id = -1, round = -1;
             Match.Team team1 = null, team2 = null;
@@ -237,13 +240,10 @@ public class BracketFragment extends Fragment {
             reader.beginObject();
             while (reader.hasNext()) {
                 String name = reader.nextName();
-                if(reader.peek() != JsonToken.NULL) {
+                if (reader.peek() != JsonToken.NULL) {
                     switch (name) {
                         case "number":
                             id = reader.nextInt();
-                            break;
-                        case "status":
-                            status = reader.nextString().toUpperCase();
                             break;
                         case "group_number":
                             int groupTemp = reader.nextInt();
@@ -283,37 +283,33 @@ public class BracketFragment extends Fragment {
                             reader.skipValue();
                             break;
                     }
-                }
-                else {
+                } else {
                     reader.skipValue();
                 }
             }
             reader.endObject();
-            return new Match(team1, team2, id, round, bracket, status, date, time);
+            return new Match(team1, team2, id, round, bracket, date, time);
         }
 
         Match.Team readTeam(JsonReader reader) throws IOException {
             String teamName = null;
             int score = 0;
-            boolean winner = false;
 
             reader.beginObject();
             while (reader.hasNext()) {
                 String name = reader.nextName();
-                if(reader.peek() != JsonToken.NULL) {
+                if (reader.peek() != JsonToken.NULL) {
                     switch (name) {
                         case "participant":
-                            if(reader.peek() == JsonToken.STRING) {
+                            if (reader.peek() == JsonToken.STRING) {
                                 teamName = reader.nextString();
-                            }
-                            else if(reader.peek() == JsonToken.BEGIN_OBJECT) {
+                            } else if (reader.peek() == JsonToken.BEGIN_OBJECT) {
                                 reader.beginObject();
-                                while(reader.hasNext()) {
+                                while (reader.hasNext()) {
                                     String nameInParticipant = reader.nextName();
-                                    if(nameInParticipant.equals("name")) {
+                                    if (nameInParticipant.equals("name")) {
                                         teamName = reader.nextString();
-                                    }
-                                    else {
+                                    } else {
                                         reader.skipValue();
                                     }
                                 }
@@ -323,21 +319,17 @@ public class BracketFragment extends Fragment {
                         case "score":
                             score = reader.nextInt();
                             break;
-                        case "result":
-                            winner = reader.nextInt() == 1;
-                            break;
                         default:
                             reader.skipValue();
                             break;
                     }
-                }
-                else {
+                } else {
                     reader.skipValue();
                 }
             }
             reader.endObject();
 
-            return new Match.Team(teamName, score, winner);
+            return new Match.Team(teamName, score);
         }
     }
 }

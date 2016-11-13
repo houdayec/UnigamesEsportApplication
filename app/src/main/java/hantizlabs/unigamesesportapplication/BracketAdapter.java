@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 /**
  * Created by Corentin on 15/10/2016.
+ * Custom Adapter for brackets
  */
 
 class BracketAdapter extends RecyclerView.Adapter<BracketAdapter.ViewHolder> {
@@ -40,7 +42,6 @@ class BracketAdapter extends RecyclerView.Adapter<BracketAdapter.ViewHolder> {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        // TODO
         return new ViewHolder(v);
     }
 
@@ -62,7 +63,7 @@ class BracketAdapter extends RecyclerView.Adapter<BracketAdapter.ViewHolder> {
     public int getItemCount() {
         try {
             return listMatch.size();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             return 0;
         }
     }

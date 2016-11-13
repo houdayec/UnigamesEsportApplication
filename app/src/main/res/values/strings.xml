@@ -4,8 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="action_event">Event information</string>
     <string name="action_location">Event location</string>
     <string name="team_event">Teams information</string>
 
@@ -14,19 +12,10 @@
     <string name="loc_address">Vanha Maantie 6, 02650 Espoo</string>
 
     <string name="welcome">What is Unigames?</string>
-    <string name="event">Unigames is a new gaming event for all university students in Helsinki metropolitan area.
-        We challenge you and your friends in your favorite games! The stake is nothing more and nothing less than glory,
-        topped with awesome prizes! For the most enthusiastic gamers we offer a corner to sleep in and a spot for
-        a computer in a LAN-party for the whole weekend. The grande finale is the League of Legends championship tournament,
-        where the true sportsmanship is measured! There will be blood, sweat, and salt!
-    </string>
     <string name="lantitle">LAN Party</string>
-    <string name="lanparty">The heart of the two day party are of course you – the game enthusiasts who live to play! Bring your battle stations, grab your friends and be ready to have fun!
-        The ticket includes one gaming place, right to use the sleeping area and limitless internet at the venue. Naturally access to the whole event, not just the LAN area, is included.
-        More information coming soon!</string>
     <string name="mainIconsTitle">Interested in the event?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="wbracket">Winners\' bracket</string>
     <string name="lbracket">Losers\' bracket</string>
+
+    <string name="position">pos</string>
 </resources>

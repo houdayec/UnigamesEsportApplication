@@ -1,10 +1,7 @@
 package hantizlabs.unigamesesportapplication;
 
-import android.app.ListActivity;
-import android.content.Context;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,18 +13,15 @@ import android.view.ViewGroup;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
-import hantizlabs.unigamesesportapplication.R;
-
 /**
  * Created by Corentin on 20/09/2016.
  */
-public class NewsFragment extends ListFragment{
-
+public class NewsFragment extends ListFragment {
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.news_layout, container, false);
 
@@ -36,11 +30,13 @@ public class NewsFragment extends ListFragment{
 
         //Implementation of the swipe refresh pull action
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override public void onRefresh() {
+            @Override
+            public void onRefresh() {
 
                 //Calling a new task provided by Fabric plugin and refresh tweets
                 new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
+                    @Override
+                    public void run() {
                         mSwipeRefreshLayout.setRefreshing(false);
                         final UserTimeline userTimeline = new UserTimeline.Builder()
                                 .screenName("Unigames_FIN")
@@ -86,9 +82,6 @@ public class NewsFragment extends ListFragment{
 
         setListAdapter(adapter);
     }
-
-
-
 
 
 }
